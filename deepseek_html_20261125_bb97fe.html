@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jang Taek-woo - Portfolio</title>
+    <style>
+        /* ================= 基础变量与重置 ================= */
+        :root {
+            --cream: #FAF8F5;
+            --dark-green: #2C4A3E;
+            --soft-green: #8BB198;
+            --light-green: #E6EFE7;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= 导航栏 ================= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            border-bottom: 1px solid var(--light-green);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--dark-green);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--dark-green);
+            border-radius: 50%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--dark-green);
+        }
+
+        /* 手机菜单按钮 */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-green);
+            cursor: pointer;
+        }
+
+        /* ================= 主体内容 ================= */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        /* 01. 介绍区域 (Hero) */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            min-height: 80vh;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: var(--light-green);
+            color: var(--dark-green);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-text h2 {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--dark-green);
+            color: #fff;
+            border-radius: 30px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: #1a3026;
+            transform: translateY(-2px);
+        }
+
+        /* 插画区域与动画 */
+        .hero-illustration {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .scene-motion {
+            width: 100%;
+            max-width: 500px;
+            transform-origin: center center;
+            will-change: transform;
+        }
+
+        .illustration-caption {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* 控制按钮 */
+        .controls {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--dark-green);
+            color: var(--dark-green);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--light-green);
+        }
+
+        /* ================= 板块通用样式 ================= */
+        section {
+            padding: 4rem 0;
+            border-top: 1px solid var(--light-green);
+            scroll-margin-top: 80px; /* 解决导航栏遮挡锚点内容 */
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--dark-green);
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* ================= 项目列表 ================= */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            text-align: left;
+            outline: none; /* 自定义焦点样式 */
+        }
+
+        .project-card:hover, .project-card:focus-visible {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            border-color: var(--soft-green);
+        }
+
+        .project-card:focus-visible {
+            box-shadow: 0 0 0 3px var(--soft-green);
+        }
+
+        .project-card h3 {
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .project-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: var(--dark-green);
+            background-color: var(--light-green);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        /* ================= 技能与活动 ================= */
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background-color: #fff;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            color: var(--dark-green);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .journey-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .journey-item {
+            display: flex;
+            gap: 2rem;
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+        }
+
+        .journey-date {
+            font-weight: bold;
+            color: var(--dark-green);
+            min-width: 120px;
+        }
+
+        /* ================= 弹窗 (Modal) ================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background-color: var(--cream);
+            width: 90%;
+            max-width: 600px;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            background: none;
+            border: none;
+        }
+
+        .modal-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-section h4 {
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            border-left: 4px solid var(--soft-green);
+            padding-left: 10px;
+        }
+
+        /* ================= 页脚 ================= */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--light-green);
+        }
+
+        /* ================= 移动端适配 ================= */
+        @media (max-width: 768px) {
+            main {
+                padding: 8rem 1.5rem 3rem;
+            }
+
+            .hero-section {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-desc {
+                margin: 0 auto 2rem;
+            }
+
+            .hero-illustration {
+                order: 2; 
+            }
+
+            /* 手机导航折叠 */
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--cream);
+                flex-direction: column;
+                padding: 1rem 2rem;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                border-bottom: 1px solid var(--light-green);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .journey-item {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* 小屏幕极度适配 (320px 左右) */
+        @media (max-width: 480px) {
+            .projects-grid {
+                grid-template-columns: 1fr; /* 强制单列，防止卡片溢出 */
+            }
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            main {
+                padding: 7rem 1rem 2rem;
+            }
+            .modal-content {
+                padding: 1.5rem;
+            }
+        }
+
+        /* 支持 prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            .scene-motion {
+                animation: none !important;
+                transform: none !important;
+            }
+            * {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo"><span></span> Moabit Energy</div>
+            <!-- 桌面端导航 -->
+            <div class="nav-links" id="nav-links">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#journey">Journey</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <!-- 移动端汉堡按钮 -->
+            <button class="mobile-menu-btn" id="menu-btn" aria-label="메뉴 열기">☰</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- 01. 介绍与插画 -->
+        <section class="hero-section" id="about">
+            <div class="hero-text">
+                <span class="hero-tag">A CAREER BEGINNING</span>
+                <h1>Taek-woo <span style="color: var(--soft-green);">*</span></h1>
+                <h2>장택우 (Jang Taek-woo)</h2>
+                <p class="hero-desc">
+                    데이터를 통해 세상을 이해하고, 가치 있는 인사이트를 도출합니다.
+                    솔담대학교 경영정보학과에서 배운 지식을 바탕으로 모아빛에너지의 데이터 분석가를 꿈꿉니다.
+                </p>
+                <!-- 修复1：按钮无反应，改为平滑滚动到项目区 -->
+                <button class="btn" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'});">프로젝트 보기</button>
+            </div>
+
+            <div class="hero-illustration">
+                <div class="scene-motion" id="scene-motion">
+                    <!-- 修改插画为男性形象 -->
+                    <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="250" cy="200" r="180" fill="#E6EFE7" opacity="0.5" />
+                        
+                        <!-- 书架 -->
+                        <rect x="50" y="100" width="80" height="150" fill="#D4C4B7" rx="4" />
+                        <rect x="60" y="110" width="60" height="20" fill="#4A7C59" rx="2" />
+                        <rect x="60" y="140" width="45" height="20" fill="#C27A5E" rx="2" />
+                        <rect x="60" y="170" width="50" height="20" fill="#5B8C9C" rx="2" />
+                        
+                        <!-- 木桌 -->
+                        <rect x="150" y="280" width="300" height="20" fill="#C49B7A" rx="5" />
+                        <rect x="170" y="300" width="20" height="80" fill="#A87B5A" />
+                        <rect x="410" y="300" width="20" height="80" fill="#A87B5A" />
+
+                        <!-- 双显示器 -->
+                        <rect x="190" y="180" width="100" height="80" fill="#2C4A3E" rx="5" />
+                        <rect x="200" y="190" width="80" height="60" fill="#E6EFE7" rx="2" />
+                        <polyline points="210,230 220,210 230,220 240,200 250,215 260,195 270,205" stroke="#4A7C59" fill="none" stroke-width="3" />
+                        
+                        <rect x="310" y="180" width="100" height="80" fill="#2C4A3E" rx="5" />
+                        <rect x="320" y="190" width="80" height="60" fill="#E6EFE7" rx="2" />
+                        <rect x="330" y="220" width="10" height="20" fill="#4A7C59" />
+                        <rect x="345" y="210" width="10" height="30" fill="#4A7C59" />
+                        <rect x="360" y="230" width="10" height="10" fill="#4A7C59" />
+                        <rect x="375" y="200" width="10" height="40" fill="#4A7C59" />
+
+                        <!-- 圆润的角色 (男性化调整: 深色短发, 蓝色衣服) -->
+                        <circle cx="280" cy="280" r="40" fill="#5B8C9C" /> <!-- 身体 -->
+                        <circle cx="280" cy="240" r="25" fill="#FCE2D4" /> <!-- 头部 -->
+                        <path d="M255,235 Q280,210 305,235 Q305,220 280,215 Q255,220 255,235" fill="#333" /> <!-- 短发 -->
+                        <circle cx="270" cy="240" r="3" fill="#333" /> <!-- 眼睛 -->
+                        <circle cx="290" cy="240" r="3" fill="#333" /> <!-- 眼睛 -->
+                        <path d="M275,250 Q280,255 285,250" stroke="#333" fill="none" stroke-width="2" /> <!-- 微笑 -->
+                        <path d="M260,255 Q260,270 250,280" stroke="#5B8C9C" fill="none" stroke-width="8" stroke-linecap="round" /> <!-- 手臂 -->
+
+                        <!-- 植物 -->
+                        <rect x="430" y="250" width="20" height="30" fill="#C27A5E" rx="2" />
+                        <path d="M440,250 Q430,220 440,200 Q450,220 440,250" fill="#4A7C59" />
+                        <path d="M440,250 Q460,230 450,210 Q435,230 440,250" fill="#5B8C9C" />
+                        
+                        <!-- 马克杯 -->
+                        <rect x="180" y="260" width="20" height="20" fill="#D4C4B7" rx="3" />
+                        <path d="M200,265 Q210,265 210,270 Q210,275 200,275" fill="none" stroke="#D4C4B7" stroke-width="3" />
+
+                        <circle cx="160" cy="150" r="5" fill="#8BB198" opacity="0.6" />
+                        <circle cx="380" cy="120" r="8" fill="#C27A5E" opacity="0.4" />
+                    </svg>
+                </div>
+                <p class="illustration-caption">데이터와 함께 성장하는 나의 작업실</p>
+                <div class="controls">
+                    <button class="btn-outline" id="toggle-animation">애니메이션 일시정지</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02. 项目列表 -->
+        <section id="projects">
+            <div class="section-header">
+                <h2 class="section-title">Projects</h2>
+                <p class="section-subtitle">"무엇을 했는지" 보여주는 과정과 근거</p>
+            </div>
+            <div class="projects-grid">
+                <!-- 修复4: 添加 tabindex 和 role 支持键盘访问 -->
+                <div class="project-card" tabindex="0" role="button" onclick="openModal(0)" onkeydown="handleKeyDown(event, 0)">
+                    <span class="project-tag">FICTIONAL PROJECT</span>
+                    <h3>별숲 캠퍼스 전력 수요 예측</h3>
+                    <p>내일의 캠퍼스 전력 사용량을 가능한 운영 계획에 도움을 줄 수 있을까? 예시 데이터로 구성한 가상 대회입니다.</p>
+                    <div style="color: var(--soft-green); margin-top: 1rem;">자세히 보기 →</div>
+                </div>
+
+                <div class="project-card" tabindex="0" role="button" onclick="openModal(1)" onkeydown="handleKeyDown(event, 1)">
+                    <span class="project-tag">FICTIONAL PROJECT</span>
+                    <h3>고객 이탈 예측 모델링</h3>
+                    <p>통신사 고객 데이터를 활용하여 이탈 가능성이 높은 고객을 분류하고, 타겟팅 마케팅 전략을 수립했습니다.</p>
+                    <div style="color: var(--soft-green); margin-top: 1rem;">자세히 보기 →</div>
+                </div>
+
+                <div class="project-card" tabindex="0" role="button" onclick="openModal(2)" onkeydown="handleKeyDown(event, 2)">
+                    <span class="project-tag">FICTIONAL PROJECT</span>
+                    <h3>대시보드 시각화 구축</h3>
+                    <p>지역별 에너지 소비 패턴을 직관적으로 파악할 수 있는 인터랙티브 웹 대시보드를 제작했습니다.</p>
+                    <div style="color: var(--soft-green); margin-top: 1rem;">자세히 보기 →</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03. 技能 -->
+        <section id="skills">
+            <div class="section-header">
+                <h2 class="section-title">Skills</h2>
+                <p class="section-subtitle">도구 + 실제 활용 경험</p>
+            </div>
+            <div class="skills-list">
+                <div class="skill-item">Python (Pandas, NumPy)</div>
+                <div class="skill-item">SQL (MySQL, PostgreSQL)</div>
+                <div class="skill-item">Data Visualization (Tableau, Matplotlib)</div>
+                <div class="skill-item">HTML / CSS / JavaScript</div>
+                <div class="skill-item">Statistical Analysis</div>
+            </div>
+        </section>
+
+        <!-- 04. 活动记录 -->
+        <section id="journey">
+            <div class="section-header">
+                <h2 class="section-title">Journey</h2>
+                <p class="section-subtitle">기간 + 역할 + 배운 점</p>
+            </div>
+            <div class="journey-list">
+                <div class="journey-item">
+                    <div class="journey-date">2023.06 - 2023.08</div>
+                    <div>
+                        <h3 style="color: var(--dark-green); margin-bottom: 0.5rem;">Yeoul Data Lab (여울데이터랩) 인턴</h3>
+                        <p style="color: var(--text-muted);">데이터 전처리 및 기초 EDA 업무를 담당하며, 실제 비즈니스 문제 해결 과정을 경험했습니다.</p>
+                    </div>
+                </div>
+                <div class="journey-item">
+                    <div class="journey-date">2023.09 - 2023.12</div>
+                    <div>
+                        <h3 style="color: var(--dark-green); margin-bottom: 0.5rem;">Byeolsup 데이터 챌린지</h3>
+                        <p style="color: var(--text-muted);">팀장으로 참여하여 전력 수요 예측 모델을 개발하고, 우수상을 수상했습니다. (가상 설정)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05. 联系方式 -->
+        <section id="contact">
+            <div class="section-header">
+                <h2 class="section-title">Contact</h2>
+            </div>
+            <p style="font-size: 1.2rem; color: var(--dark-green);">
+                📧 <a href="mailto:taekwoo@example.com" style="text-decoration: underline;">taekwoo@example.com</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>본 페이지의 모든 경험과 정보는 가상의 학생(Jang Taek-woo)을 위해 제작된 예시입니다.</p>
+        <p>© 2024 AI PORTFOLIO LAB · Boram Kwon 교수</p>
+    </footer>
+
+    <!-- 弹窗 (Modal) -->
+    <div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <button class="close-btn" id="close-modal-btn" onclick="closeModal()" aria-label="닫기">&times;</button>
+            <span class="project-tag" style="margin-bottom: 1rem; display: inline-block;">FICTIONAL PROJECT</span>
+            <h2 id="modal-title" style="color: var(--dark-green); margin-bottom: 1.5rem;">프로젝트 제목</h2>
+            
+            <div class="modal-section">
+                <h4>문제 (Problem)</h4>
+                <p id="modal-problem" style="color: var(--text-muted);">문제 설명</p>
+            </div>
+            
+            <div class="modal-section">
+                <h4>내 역할 (My Role)</h4>
+                <p id="modal-role" style="color: var(--text-muted);">역할 설명</p>
+            </div>
+
+            <div class="modal-section">
+                <h4>방법 (Method)</h4>
+                <p id="modal-method" style="color: var(--text-muted);">방법 설명</p>
+            </div>
+
+            <div class="modal-section">
+                <h4>결과와 배움 (Result & Learning)</h4>
+                <p id="modal-result" style="color: var(--text-muted);">결과 설명</p>
+            </div>
+
+            <!-- 修复5：补充内容依据 -->
+            <div class="modal-section" style="background: var(--light-green); padding: 1rem; border-radius: 8px;">
+                <h4 style="border-left: none; padding-left: 0; font-size: 1rem; margin-bottom: 0.5rem;">사용 도구 및 링크 (Tools & Links)</h4>
+                <p id="modal-tools" style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--text-main);">도구 목록</p>
+                <a href="#" id="modal-link" onclick="alert('가상의 링크입니다.'); return false;" style="font-size: 0.9rem; color: var(--dark-green); text-decoration: underline;">프로젝트 결과물 보기</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ================= 移动端菜单逻辑 ================= */
+        const menuBtn = document.getElementById('menu-btn');
+        const navLinks = document.getElementById('nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuBtn.innerText = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // 点击链接后关闭菜单
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuBtn.innerText = '☰';
+            });
+        });
+
+        /* ================= 弹窗数据与逻辑 ================= */
+        const projectsData = [
+            {
+                title: "별숲 캠퍼스 전력 수요 예측",
+                problem: "내일의 캠퍼스 전력 사용량을 가능한 운영 계획에 도움을 줄 수 있을까? (예시 데이터로 구성한 가상 대회입니다.)",
+                role: "자료 정리와 시간 기준 점검 샘플을 맡았던 가상 설정입니다.",
+                method: "날씨·요일·계기 사용량을 비교하고, 시간 순서를 지킨 학습·검증 구조를 구성했습니다.",
+                result: "별숲 데이터 챌린지 우수상이라는 가상 수상 예시입니다. 실제 성능을 수치를 제시하지 않으며, 미래 데이터가 학습에 섞이지 않도록 확인하는 중요성을 보여줍니다.",
+                tools: "Python, Pandas, Scikit-learn, Matplotlib",
+                link: "https://github.com/example/power-prediction (가상)"
+            },
+            {
+                title: "고객 이탈 예측 모델링",
+                problem: "통신사 고객 이탈을 사전에 방지하기 위한 예측 모델이 필요했습니다.",
+                role: "데이터 전처리, 피처 엔지니어링 및 모델링을 주도했습니다.",
+                method: "Random Forest와 XGBoost 알고리즘을 활용하여 모델을 비교 평가했습니다.",
+                result: "이탈 예측 정확도 85%를 달성했으며, 주요 이탈 요인을 파악하여 마케팅 전략 수립에 기여했습니다. (가상 설정)",
+                tools: "Python, XGBoost, SQL, Tableau",
+                link: "https://github.com/example/churn-model (가상)"
+            },
+            {
+                title: "대시보드 시각화 구축",
+                problem: "지역별 에너지 소비 데이터가 방대하여 직관적인 파악이 어려웠습니다.",
+                role: "UI 설계 및 데이터 시각화 로직 구현을 담당했습니다.",
+                method: "Python의 Plotly와 Dash를 활용하여 인터랙티브 웹 대시보드를 개발했습니다.",
+                result: "사용자 친화적인 인터페이스를 통해 데이터 분석 시간을 단축하고 의사결정을 지원했습니다. (가상 설정)",
+                tools: "Python, Plotly, Dash, CSS",
+                link: "https://github.com/example/energy-dashboard (가상)"
+            }
+        ];
+
+        let previousActiveElement = null;
+
+        function openModal(index) {
+            // 修复4：记录触发弹窗的元素，以便关闭时恢复焦点
+            previousActiveElement = document.activeElement; 
+            
+            const data = projectsData[index];
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-problem').innerText = data.problem;
+            document.getElementById('modal-role').innerText = data.role;
+            document.getElementById('modal-method').innerText = data.method;
+            document.getElementById('modal-result').innerText = data.result;
+            document.getElementById('modal-tools').innerText = data.tools;
+            document.getElementById('modal-link').href = data.link;
+            
+            const modal = document.getElementById('modal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // 聚焦到关闭按钮
+            document.getElementById('close-modal-btn').focus();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // 恢复焦点到之前的卡片
+            if (previousActiveElement) {
+                previousActiveElement.focus();
+            }
+        }
+
+        // 修复4：键盘事件监听 (Enter / Space 打开，Esc 关闭)
+        function handleKeyDown(event, index) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openModal(index);
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('modal').classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        /* ================= 动画逻辑优化 ================= */
+        const scene = document.getElementById('scene-motion');
+        const toggleBtn = document.getElementById('toggle-animation');
+        
+        let isPaused = false;
+        let isTabVisible = true;
+        let animationFrameId = null;
+        let startTime = null;
+        
+        let targetRotateX = 0;
+        let targetRotateY = 0;
+        let currentRotateX = 0;
+        let currentRotateY = 0;
+        let scrollOffset = 0;
+        
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let isMotionAllowed = !prefersReducedMotion;
+
+        // 修复6：暂停/启动动画控制（彻底 cancel 掉 requestAnimationFrame）
+        function startAnimation() {
+            if (!animationFrameId && isMotionAllowed && !isPaused && isTabVisible) {
+                startTime = performance.now();
+                animationFrameId = requestAnimationFrame(animate);
+            }
+        }
+
+        function stopAnimation() {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+                animationFrameId = null;
+            }
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            isPaused = !isPaused;
+            toggleBtn.innerText = isPaused ? "애니메이션 재생" : "애니메이션 일시정지";
+            if (isPaused) {
+                stopAnimation();
+                scene.style.transform = 'none'; // 重置
+            } else {
+                startAnimation();
+            }
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isMotionAllowed || isPaused || window.innerWidth <= 768) return;
+            const x = (e.clientX / window.innerWidth) - 0.5;
+            const y = (e.clientY / window.innerHeight) - 0.5;
+            // 最大倾斜 4 度
+            targetRotateX = -y * 8;
+            targetRotateY = x * 8;
+        });
+
+        document.addEventListener('mouseleave', () => {
+            targetRotateX = 0;
+            targetRotateY = 0;
+        });
+
+        window.addEventListener('scroll', () => {
+            scrollOffset = -Math.min(window.scrollY * 0.1, 20);
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            isTabVisible = !document.hidden;
+            if (isTabVisible) {
+                startAnimation();
+            } else {
+                stopAnimation();
+            }
+        });
+
+        // 修复6：使用 requestAnimationFrame 提供的时间参数 (timestamp)
+        function animate(timestamp) {
+            if (!isMotionAllowed || isPaused || !isTabVisible) return;
+
+            if (!startTime) startTime = timestamp;
+            const elapsed = timestamp - startTime;
+            
+            // 7秒周期浮动 5px
+            const floatY = Math.sin(elapsed / 7000 * Math.PI * 2) * 5;
+
+            // 平滑插值
+            currentRotateX += (targetRotateX - currentRotateX) * 0.05;
+            currentRotateY += (targetRotateY - currentRotateY) * 0.05;
+
+            let transformStr = `translateY(${floatY + scrollOffset}px) `;
+            if (window.innerWidth > 768) {
+                transformStr += `perspective(1000px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) `;
+            }
+
+            scene.style.transform = transformStr;
+
+            animationFrameId = requestAnimationFrame(animate);
+        }
+
+        // 初始化
+        if (isMotionAllowed) {
+            startAnimation();
+        }
+    </script>
+</body>
+</html>
